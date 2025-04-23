@@ -1,7 +1,14 @@
-#include <iostream>
+#include "main.hpp"
 
 int main()
 {
-	std::cout << "ZOOMBII" << std::endl;
+	Zombie *zombie;
+
+	zombie = newZombie("Robert");
+	zombie->announce();
+	delete zombie;
+	zombie = NULL;
+	randomChump("Marco");
+	randomChump("Louise");
 	return 0;
 }
