@@ -5,7 +5,12 @@ Zombie::Zombie(std::string name)
 	this->name = name;
 }
 
-void Zombie::announce(void)
+Zombie::~Zombie()
+{
+	std::cout << this->name << ": Bye 👋" << std::endl;
+}
+
+void Zombie::announce(void) const
 {
 	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." <<  std::endl;
 }

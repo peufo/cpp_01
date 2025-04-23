@@ -4,10 +4,10 @@ DIR_BUILD		=	./build
 SOURCES			=	Zombie.cpp main.cpp newZombie.cpp randomChump.cpp 
 SOURCES_NAME	=	$(basename $(SOURCES))
 OBJECTS			=	$(addsuffix .o, $(addprefix $(DIR_BUILD)/, $(SOURCES_NAME)))
-CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -g
+CFLAGS			=	-Wall -Wextra -Werror -std=c++98
 LDINCLUDE		=	-I$(DIR_SRC)
-LDFLAGS			=	
-LDLIBS			=	-lstdc++
+LDFLAGS			=
+LDLIBS			=
 
 all: $(NAME)
 
