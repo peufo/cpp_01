@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PROG="./harlFilter"
+PROG="./prog"
 SRC_DIR="./src"
 LEAKS_CHECK=true
 

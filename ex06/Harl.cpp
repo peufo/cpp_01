@@ -12,8 +12,14 @@ static std::size_t get_hash(const std::string& str)
 static std::string str_touper(const std::string& str)
 {
 	std::string res(str);
-	std::transform(str.begin(), str.end(), res.begin(), ::toupper);
-	return res;
+	std::string::iterator it(res.begin());
+
+	while (it != res.end())
+	{
+		*it = ::toupper(*it);
+		it++;
+	}
+	return (res);
 }
 
 Harl::Harl(std::string level)

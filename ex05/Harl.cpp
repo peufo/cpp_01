@@ -2,20 +2,25 @@
 
 Harl::Harl()
 {
-	this->func_map["debug"] = &Harl::debug;
-	this->func_map["info"] = &Harl::info;
-	this->func_map["warning"] = &Harl::warning;
-	this->func_map["error"] = &Harl::error;
+	this->levels[0] = (Harl::s_level){"debug", &Harl::debug};
+	this->levels[1] = (Harl::s_level){"info", &Harl::info};
+	this->levels[2] = (Harl::s_level){"warning", &Harl::warning};
+	this->levels[3] = (Harl::s_level){"error", &Harl::error};
 }
 
 Harl::~Harl()
 {
 }
 
+
+
 void Harl::complain(std::string level)
 {
-	Harl::log_func func = this->func_map[level];
+	Harl::log_func func(NULL);
 
+	for (int i = 0; i < 4 && !func; i++)
+		if (this->levels[i].name == level)
+			func = this->levels[i].func;
 	std::cout << "[" << level << "]" << std::endl;
 	if (func)
 		(this->*func)();

@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <map>
-#include <algorithm>
 #define HASH_DEBUG 166095534137
 #define HASH_INFO 5033387614
 #define HASH_WARNING 180902436753032
