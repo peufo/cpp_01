@@ -1,44 +1,44 @@
 #include "Harl.hpp"
 
-static std::size_t get_hash(const std::string& str)
+static std::string to_lower(std::string str)
 {
-    static std::size_t hash = 4242;
-
-    for (std::size_t i = 0; i < str.size(); i++)
-        hash = 33 * hash + (std::size_t)str[i];
-    return hash;
-}
-
-static std::string str_touper(const std::string& str)
-{
-	std::string res(str);
-	std::string::iterator it(res.begin());
-
-	while (it != res.end())
-	{
-		*it = ::toupper(*it);
-		it++;
-	}
-	return (res);
+	for (std::string::iterator it = str.begin(); it != str.end(); it++)
+		if ('A' <= *it && *it <= 'Z')
+			*it += 32;
+	return (str);
 }
 
 Harl::Harl(std::string level)
 {
-	std::size_t hash_level = get_hash(level);
+	std::string level_name = to_lower(level);
+	int level_index = -1;
 
-	switch (hash_level)
+	this->levels[0].name = "debug";
+	this->levels[0].func = NULL;
+	this->levels[1].name = "info";
+	this->levels[1].func = NULL;
+	this->levels[2].name = "warning";
+	this->levels[2].func = NULL;
+	this->levels[3].name = "error";
+	this->levels[3].func = NULL;
+
+	for (int i = 0; i < 4 && level_index  == -1; i++)
+		if (this->levels[i].name == level_name)
+			level_index = i;
+
+	switch (level_index)
 	{
-		case HASH_DEBUG:
-			this->func_map["debug"] = &Harl::debug;
+		case 0:
+			this->levels[0].func = &Harl::debug;
 			__attribute__ ((fallthrough));
-		case HASH_INFO:
-			this->func_map["info"] = &Harl::info;
+		case 1:
+			this->levels[1].func = &Harl::info;
 			__attribute__ ((fallthrough));
-		case HASH_WARNING:
-			this->func_map["warning"] = &Harl::warning;
+		case 2:
+			this->levels[2].func = &Harl::warning;
 			__attribute__ ((fallthrough));
-		case HASH_ERROR:
-			this->func_map["error"] = &Harl::error;
+		case 3:
+			this->levels[3].func = &Harl::error;
 			break;
 		default:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
@@ -52,22 +52,26 @@ Harl::~Harl()
 
 void Harl::complain(std::string level)
 {
-	Harl::log_func func = this->func_map[level];
+	Harl::log_func func(NULL);
+
+	for (int i = 0; i < 4 && !func; i++)
+		if (this->levels[i].name == level)
+			func = this->levels[i].func;
 	if (!func)
 		return ;
-	std::cout << "[" << str_touper(level) << "]" << std::endl;
 	(this->*func)();
-	std::cout << std::endl;
 }
 
 void Harl::debug(void)
 {
+	std::cout << "[DEBUG]" << std::endl;
 	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger." << std::endl;
 	std::cout << "I really do!" << std::endl;
 }
 
 void Harl::info(void)
 {
+	std::cout << "[INFO]" << std::endl;
 	std::cout << "I cannot believe adding extra bacon costs more money." << std::endl;
 	std::cout << "You didn’t put enough bacon in my burger!" << std::endl;
 	std::cout << "If you did, I wouldn’t be asking for more!" << std::endl;
@@ -75,12 +79,14 @@ void Harl::info(void)
 
 void Harl::warning(void)
 {
+	std::cout << "[WARNING]" << std::endl;
 	std::cout << "I think I deserve to have some extra bacon for free." << std::endl;
 	std::cout << "I’ve been coming for years, whereas you started working here just last month." << std::endl;
 }
 
 void Harl::error(void)
 {
+	std::cout << "[ERROR]" << std::endl;
 	std::cout << "This is unacceptable!" << std::endl;
 	std::cout << "I want to speak to the manager now." << std::endl;
 }

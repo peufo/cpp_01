@@ -2,17 +2,19 @@
 
 Harl::Harl()
 {
-	this->levels[0] = (Harl::s_level){"debug", &Harl::debug};
-	this->levels[1] = (Harl::s_level){"info", &Harl::info};
-	this->levels[2] = (Harl::s_level){"warning", &Harl::warning};
-	this->levels[3] = (Harl::s_level){"error", &Harl::error};
+	this->levels[0].name = "debug";
+	this->levels[0].func = &Harl::debug;
+	this->levels[1].name = "info";
+	this->levels[1].func = &Harl::info;
+	this->levels[2].name = "warning";
+	this->levels[2].func = &Harl::warning;
+	this->levels[3].name = "error";
+	this->levels[3].func = &Harl::error;
 }
 
 Harl::~Harl()
 {
 }
-
-
 
 void Harl::complain(std::string level)
 {
