@@ -38,7 +38,7 @@ watch() {
 				success "COMPILATION OK\n"
 				info "───────────────────────────────────────────────────\n"
 
-				$LEAKS_CMD $PROG Makefile
+				$LEAKS_CMD $PROG
 
 			fi
 		fi
