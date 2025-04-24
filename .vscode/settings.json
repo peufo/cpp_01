@@ -72,6 +72,7 @@
     "system_error": "cpp",
     "type_traits": "cpp",
     "utility": "cpp",
-    "format": "cpp"
+    "format": "cpp",
+    "functional": "cpp"
   }
 }

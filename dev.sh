@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROG="./prog"
+PROG="./harlFilter"
 SRC_DIR="./src"
 LEAKS_CHECK=true
 
@@ -38,7 +38,7 @@ watch() {
 				success "COMPILATION OK\n"
 				info "───────────────────────────────────────────────────\n"
 
-				$LEAKS_CMD $PROG
+				$LEAKS_CMD $PROG DEBUG
 
 			fi
 		fi
