@@ -1,6 +1,6 @@
 #include "Harl.hpp"
 
-static std::string to_lower(std::string str)
+static std::string toLower(std::string str)
 {
 	for (std::string::iterator it = str.begin(); it != str.end(); it++)
 		if ('A' <= *it && *it <= 'Z')
@@ -10,7 +10,7 @@ static std::string to_lower(std::string str)
 
 Harl::Harl(std::string level)
 {
-	std::string level_name = to_lower(level);
+	std::string level_name = toLower(level);
 	int level_index = -1;
 
 	this->levels[0].name = "debug";
@@ -52,7 +52,7 @@ Harl::~Harl()
 
 void Harl::complain(std::string level)
 {
-	Harl::log_func func(NULL);
+	Harl::logFunc func(NULL);
 
 	for (int i = 0; i < 4 && !func; i++)
 		if (this->levels[i].name == level)

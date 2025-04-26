@@ -2,3 +2,4 @@ build
 prog
 harlFilter
 *.log
+.vscode/settings.json

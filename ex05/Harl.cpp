@@ -18,7 +18,7 @@ Harl::~Harl()
 
 void Harl::complain(std::string level)
 {
-	Harl::log_func func(NULL);
+	Harl::logFunc func(NULL);
 
 	for (int i = 0; i < 4 && !func; i++)
 		if (this->levels[i].name == level)

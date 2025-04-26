@@ -1,13 +1,15 @@
-#pragma once
+#ifndef HARL_HPP
+#define HARL_HPP
+
 #include <iostream>
 
 class Harl
 {
-	typedef void (Harl::*log_func)();
+	typedef void (Harl::*logFunc)();
 	struct s_level
 	{
 		std::string name;
-		log_func func;
+		logFunc func;
 	};
 	private:
 		void debug(void);
@@ -21,3 +23,4 @@ class Harl
 		void complain(std::string level);
 };
 
+#endif
